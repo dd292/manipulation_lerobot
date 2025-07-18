@@ -10,6 +10,7 @@ import mujoco
 import numpy as np
 from gymnasium import spaces
 
+
 #from gym_hil.controller  import opspace
 
 MAX_GRIPPER_COMMAND = 5
@@ -32,7 +33,7 @@ class MujocoGymEnv(gym.Env):
         seed: int = 0,
         control_dt: float = 0.02,
         physics_dt: float = 0.002,
-        render_spec: GymRenderingSpec = GymRenderingSpec(),  # noqa: B008
+        render_spec: GymRenderingSpec = GymRenderingSpec(), 
     ):
         self._model = mujoco.MjModel.from_xml_path(xml_path.as_posix())
         self._model.vis.global_.offwidth = render_spec.width
@@ -243,7 +244,7 @@ class S101GymEnv(MujocoGymEnv):
         #         gravity_comp=True,
         # #     )
         #     self._data.ctrl[self._panda_ctrl_ids] = tau
-            # mujoco.mj_step(self._model, self._data)
+        mujoco.mj_step(self._model, self._data)
 
     def get_robot_state(self):
         """Get the current state of the robot."""
@@ -269,17 +270,3 @@ class S101GymEnv(MujocoGymEnv):
         """Get the current pose of the gripper."""
         return np.array([self._data.ctrl[self._gripper_ctrl_id]], dtype=np.float32)
 
-if __name__ == "__main__":
-    import os
-    import sys
-
-    # Add the parent directory to the Python path
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-    # Example usage
-    env = S101GymEnv(xml_path=Path("low_cost_robot_arm/scene_box.xml"))
-    env.reset_robot()
-    action = np.zeros(7)  # Example action
-    env.apply_action(action)
-    obs = env.get_robot_state()
-    print(obs)

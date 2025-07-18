@@ -17,13 +17,9 @@ This is how the intial model should look like.
 ![Model](media/init_mujoco.png)
 
 Mujoco environment of s101 is added in `mujoco_gym_env.py`
-This can be tested using 
+This enviroment is called by another environment that has the step  and reset functions. 
+we can test this using. 
 ``` 
-python mujoco_gym_env.py
+mjpython robot_infra/env/PickBoxS101env.py
 ```
-The output of running the environment should look like 
-```
-[ 0.         0.         0.         0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.        -0.19028   -0.001253   0.1672999]
-```
+The output of running the environment should look like sim running for a bit before shuttign down. 
