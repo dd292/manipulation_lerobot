@@ -89,6 +89,7 @@
                 <inertial pos="-0.019091 0.0053379 0.00018011" quat="0.105295 0.703509 -0.0986543 0.695885"
                   mass="0.029277" diaginertia="8.11303e-06 7.14908e-06 3.27429e-06"/>
                 <joint name="wrist_roll" pos="0 0 0" axis="1 0 0" range="-3.14 3.14"/>
+                <site name="pinch" pos="-0.042 0 0"/>
                 <geom mesh="gripper_static_finger" class="visual" material="white"/>
                 <geom mesh="gripper_static_finger_motor" class="visual" material="black"/>
                 <geom mesh="gripper_static_finger_collision_1" class="collision"/>
@@ -96,6 +97,8 @@
                 <geom class="pad_box1" name="gripper_static_finger_pad_1" pos="-0.0668 0.0105 0.00045"/>
                 <geom class="pad_box2" name="gripper_static_finger_pad_3" pos="-0.0628 0.0105 0.0005"/>
                 <body name="gripper_moving_finger" pos="-0.01315 -0.0075 0.0145">
+                  <camera name="handcam_depth" pos="-0.05 0 0" fovy="62" quat="0 1 -1 0"/>
+                  <camera name="handcam_rgb" pos="-0.05 0.015 0" fovy="42.5" quat="0 1 -1 0"/>
                   <inertial pos="-0.02507 0.0010817 -0.01414" quat="0.528148 0.5474 0.466496 0.451436" mass="0.012831"
                     diaginertia="3.49922e-06 2.45768e-06 1.4645e-06"/>
                   <joint name="gripper" pos="0 0 0" axis="0 0 -1" range="-1.60 0.032" frictionloss="0.1"/>
@@ -126,6 +129,26 @@
     <position class="low_cost_robot_arm" name="gripper" joint="gripper" forcerange="-5 5"/>
   </actuator>
 
+  <sensor>
+    <jointpos name="s101/base_rotation_pos" joint="base_rotation"/>
+    <jointpos name="s101/pitch_pos" joint="pitch"/>
+    <jointpos name="s101/elbow_pos" joint="elbow"/>
+    <jointpos name="s101/wrist_pitch_pos" joint="wrist_pitch"/>
+    <jointpos name="s101/wrist_roll_pos" joint="wrist_roll"/>
+    <jointpos name="s101/gripper_pos" joint="gripper"/>
+
+    <jointvel name="s101/base_rotation_vel" joint="base_rotation"/>
+    <jointvel name="s101/pitch_vel" joint="pitch"/>
+    <jointvel name="s101/elbow_vel" joint="elbow"/>
+    <jointvel name="s101/wrist_pitch_vel" joint="wrist_pitch"/>
+    <jointvel name="s101/wrist_roll_vel" joint="wrist_roll"/>
+    <jointvel name="s101/gripper_vel" joint="gripper"/>
+
+    <framepos name="pinch_pos" objtype="site" objname="pinch"/>
+    <framequat name="pinch_quat" objtype="site" objname="pinch"/>
+    <framelinvel name="pinch_vel" objtype="site" objname="pinch"/>
+    <frameangvel name="pinch_angvel" objtype="site" objname="pinch"/>
+  </sensor>
   <!-- <keyframe>
     <key name="home" qpos="0 0 0 0 0 0" ctrl="0 0 0 0 0 0"/>
   </keyframe> -->
